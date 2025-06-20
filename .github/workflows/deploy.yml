@@ -1,35 +1,29 @@
-name: GitHub Pages Deployment
+name: Deploy Static HTML to GitHub Pages
+
 on:
   push:
     branches:
-      - main # Trigger workflow on push to the main branch
+      - main # This triggers the workflow whenever code is pushed to the "main" branch
 
 jobs:
-  build_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
+      # Step 1: Check out the repository's code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js (if you're using a Node.js-based project)
+      # Step 2: Set up Node.js (optional, but useful if your HTML requires npm or build commands)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Build the application (execute your project's build process)
-      - name: Build application
-        run: npm run build # Ensure your project has a `build` script in `package.json`
-
-      # Step 5: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
+      # Step 3: Deploy files to GitHub Pages
+      - name: Deploy HTML files to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist # Set this to your build folder (e.g., `dist` or `public`)
+          publish_dir: ./ # The root directory where your HTML files are located
+          # If your HTML files are in a `dist` folder, update `publish_dir: ./dist`
