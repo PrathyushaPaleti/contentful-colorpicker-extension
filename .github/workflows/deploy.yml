@@ -14,12 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js (optional, but useful if your HTML requires npm or build commands)
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
       # Step 3: Deploy files to GitHub Pages
       - name: Deploy HTML files to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
